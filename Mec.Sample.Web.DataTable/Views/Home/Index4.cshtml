@@ -1,0 +1,63 @@
+﻿@using Mec.Web.DataTable
+@using Mec.Web.DataTable.Models.Column
+@using Microsoft.AspNetCore.Mvc.Rendering
+
+@{
+    Layout = null;
+
+    var model = Html.DataTableModel<UserViewModel>("datatable_sample", "/datatable");
+}
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Mec DataTable 3</title>
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="/css/animate.css" />
+    @*<link rel="stylesheet" href="/css/style.css" />*@
+    <link rel="stylesheet" href="/lib/dataTables/datatables.min.css" />
+    <link href="/lib/dataTables/select.dataTables.css" rel="stylesheet" />
+
+    <!-- Mec -->
+    @*<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">*@
+    @*<link rel="stylesheet" href="https://cdn.datatables.net/colreorder/1.4.1/css/colReorder.bootstrap4.min.css">*@
+    @*<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.1/css/buttons.bootstrap4.min.css">*@
+
+    <script src="/lib/jquery/dist/jquery.js"></script>
+    <script src="/lib/Popper/popper.min.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="/lib/metisMenu/dist/jquery.metisMenu.js"></script>
+    <script src="/lib/slimScroll/jquery.slimscroll.js"></script>
+    <script src="/lib/pace/pace.js"></script>
+    <script src="/js/script.js"></script>
+    <script src="/js/skin.config.js"></script>
+    <script src="/lib/dataTables/datatable.js"></script>
+    <script src="/lib/dataTables/dataTables.select.min.js"></script>
+    <script src="/lib/dataTables/dataTables.altEditor.js"></script>
+
+    <!-- Mec -->
+    <script src="~/jquery.dataTables.columnFilter.js"></script>
+    @*<script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>*@
+    <script src="https://cdn.datatables.net/colreorder/1.4.1/js/dataTables.colReorder.min.js"></script>
+    @*<script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.colVis.min.js"></script>*@
+    @*<script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>*@
+    @*<script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.bootstrap4.min.js"></script>*@
+
+</head>
+<body>
+    <div>
+        <div class="container-fluid">
+            <h1>DataTables</h1>
+        </div>
+        @await Html.PartialAsync("~/Views/Shared/DataTable/_DataTableHtml4.cshtml", model).ConfigureAwait(true)
+    </div>
+
+    @await Html.PartialAsync("~/Views/Shared/DataTable/_DataTableScript4.cshtml", model).ConfigureAwait(true)
+
+</body>
+</html>

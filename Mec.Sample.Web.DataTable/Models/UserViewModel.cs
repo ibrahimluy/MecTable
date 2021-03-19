@@ -11,6 +11,7 @@ namespace Mec.Sample.Web.DataTable.Models
         [DataTable(IsVisible = false, Order = 1)]
         public int Id { get; set; }
 
+        [DataTable(DisplayName = "Full Name", Title = "Full Name", Required = "true", Order = 1)]
         public string FullName { get; set; }
 
         [DataTable(DisplayName = "Created At", Order = 2)]
@@ -19,4 +20,6 @@ namespace Mec.Sample.Web.DataTable.Models
         [DataTable(DisplayName = "Actived", Order = 4)]
         public bool IsActive { get; set; }
     }
+
+
 }

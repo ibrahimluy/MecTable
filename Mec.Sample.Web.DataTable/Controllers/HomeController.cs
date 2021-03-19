@@ -32,6 +32,11 @@ namespace Mec.Sample.Web.DataTable.Controllers
             return View();
         }
 
+        public IActionResult Index4()
+        {
+            return View();
+        }
+
 
         public IActionResult Test()
         {

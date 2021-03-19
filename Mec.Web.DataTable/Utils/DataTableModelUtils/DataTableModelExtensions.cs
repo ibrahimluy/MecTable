@@ -104,6 +104,18 @@ namespace Mec.Web.DataTable.Utils.DataTableModelUtils
             columnsJsonObject.AddRange(ConvertColumnToTargetedProperty(PropertyConstants.Width, column => column.Width,
                 IsNonEmptyString, columns));
 
+            columnsJsonObject.AddRange(ConvertColumnToTargetedProperty(PropertyConstants.Title, column => column.Title,
+                IsNonEmptyString, columns));
+
+            columnsJsonObject.AddRange(ConvertColumnToTargetedProperty(PropertyConstants.OType, column => column.OType,
+                IsNonEmptyString, columns));
+
+            columnsJsonObject.AddRange(ConvertColumnToTargetedProperty(PropertyConstants.Required, column => column.Required,
+               IsNonEmptyString, columns));
+
+            columnsJsonObject.AddRange(ConvertColumnToTargetedProperty(PropertyConstants.Pattern, column => column.Pattern,
+                IsNonEmptyString, columns));
+
             return columnsJsonObject.Any() ? JsonConvert.SerializeObject(columnsJsonObject) : DataConstants.EmptyArray;
         }
 

@@ -49,12 +49,25 @@ namespace Mec.Web.DataTable.Attributes
         /// </summary>
         /// <remarks> Ex: "data-toggle='tooltip' data-original-title='Tooltip Title'" </remarks>
         public string FilterColAdditionalAttribute { get; set; }
-        
+
         /// <summary>
         ///     Additional HTML Element attributes for header column 
         /// </summary>
         /// <remarks> Ex: "data-toggle='tooltip' data-original-title='Tooltip Title'" </remarks>
         public string AdditionalAttributeHeader { get; set; }
+
+
+        #region Validations
+        public string Title { get; set; }
+
+        public string OType { get; set; }
+
+        public string Required { get; set; }
+
+        public string Pattern { get; set; }
+
+        #endregion
+
 
         public override void ApplyTo(ColumnModel columnModel, PropertyInfo propertyInfo)
         {
@@ -71,6 +84,10 @@ namespace Mec.Web.DataTable.Attributes
             columnModel.FilterColHint = MecDataTableTranslator.Get(FilterColHint);
             columnModel.FilterColAdditionalAttribute = FilterColAdditionalAttribute;
             columnModel.AdditionalAttributeHeader = AdditionalAttributeHeader;
+            columnModel.Title = Title;
+            columnModel.OType = OType;
+            columnModel.Required = Required;
+            columnModel.Pattern = Pattern;
         }
     }
 }

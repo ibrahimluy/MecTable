@@ -155,5 +155,19 @@ namespace Mec.Web.DataTable.Models
         ///     Ex: beforeSendHandle(aoData).
         /// </summary>
         public string BeforeSendFunctionName { get; set; }
+
+        #region Custom
+
+        public string RowSelectType { get; set; } = "single";
+
+        public bool AltEditor { get; set; } = true;
+
+        public string HasAddAjax { get; set; }
+
+        public string HasEditAjax { get; set; }
+
+        public string HasDeleteAjax { get; set; }
+
+        #endregion
     }
 }

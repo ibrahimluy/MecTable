@@ -90,5 +90,20 @@
         public const string Last = "sLast";
 
         #endregion
+
+        #region Custom
+        public const string RowSelectType = "select";
+        public const string AltEditor = "altEditor";
+
+        public const string AddRow = "onAddRow";
+        public const string DeleteRow = "onDeleteRow";
+        public const string EditRow = "onEditRow";
+
+        public const string Title = "title";
+        public const string OType = "type";
+        public const string Required = "required";
+        public const string Pattern = "pattern";
+
+        #endregion
     }
 }

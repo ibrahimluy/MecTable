@@ -48,12 +48,12 @@ namespace Mec.Web.DataTable.Models.Column
         public Attribute[] CustomAttributes { get; set; }
 
         public string Width { get; set; }
-        
+
         /// <summary>
         ///     Set place holder for the filter column as hint. If null will take default by the logic in _DataTableHTML.cshtml
         /// </summary>
         public string FilterColHint { get; set; }
-        
+
         /// <summary>
         ///     Additional HTML Element attributes for filter column 
         /// </summary>
@@ -65,5 +65,16 @@ namespace Mec.Web.DataTable.Models.Column
         /// </summary>
         /// <remarks> Ex: "data-toggle='tooltip' data-original-title='Tooltip Title'" </remarks>
         public string AdditionalAttributeHeader { get; set; }
+
+        #region Validations
+        public string Title { get; set; }
+
+        public string OType { get; set; }
+
+        public string Required { get; set; }
+
+        public string Pattern { get; set; }
+
+        #endregion
     }
 }
