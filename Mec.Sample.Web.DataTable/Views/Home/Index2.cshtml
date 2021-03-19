@@ -1,0 +1,95 @@
+﻿@using Mec.Web.DataTable
+@using Mec.Web.DataTable.Models.Column
+@using Microsoft.AspNetCore.Mvc.Rendering
+
+@{
+    Layout = null;
+
+    // Get model
+    var model = Html.DataTableModel<UserViewModel>("datatable_sample", "/datatable");
+    model.GlobalJsVariableName = "datatable_sample";
+
+    // Global Configuration
+    model.IsDevelopMode = false;
+    model.DrawCallbackFunctionName = "drawCallback";
+    model.BeforeSendFunctionName = "beforeSendHandle";
+
+    // Additional Columns
+    model.Columns.Add(new ColumnModel("Action", typeof(string))
+    {
+        DisplayName = "Action Col",
+        IsSearchable = false,
+        IsSortable = false,
+        MRenderFunction = "actionColRender"
+    });
+
+    // Render Functions
+    model.Columns.Single(x => x.Name == nameof(UserViewModel.IsActive)).MRenderFunction = "isActiveRender";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Mec Index2</title>
+
+    <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <!-- DataTable -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">-
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+
+    <!-- DataTable - Extensions -->
+    <script src="~/jquery.dataTables.columnFilter.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/colreorder/1.4.1/css/colReorder.bootstrap4.min.css">
+    <script src="https://cdn.datatables.net/colreorder/1.4.1/js/dataTables.colReorder.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.colVis.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.1/css/buttons.bootstrap4.min.css">
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.bootstrap4.min.js"></script>
+
+    <!-- Explore more DataTable Plugin in https://datatables.net/download/release -->
+</head>
+<body>
+    <div>
+        <div class="container-fluid">
+            <h1>DataTables</h1>
+        </div>
+        @await Html.PartialAsync("~/Views/Shared/DataTable/_DataTableHtml.cshtml", model).ConfigureAwait(true)
+    </div>
+
+    @await Html.PartialAsync("~/Views/Shared/DataTable/_DataTableScript.cshtml", model).ConfigureAwait(true)
+
+    <script type="text/javascript">
+        function beforeSendHandle(data) {
+            data.push({
+                name: "newData",
+                value: "test modify data before send"
+            });
+        }
+
+        function actionColRender(data, type, row) {
+            return "<button class='btnAction'>Acion for " + row[0] + "</button>";
+        }
+
+        function isActiveRender(data, type, row) {
+            if (data === "Yes") {
+                return data;
+            }
+            return "<span style='color:red'>" + data + "</span>";
+        }
+
+        function drawCallback() {
+            $(".btnAction").on('click',
+                function () {
+                    alert('clicked');
+                });
+        }
+    </script>
+</body>
+</html>

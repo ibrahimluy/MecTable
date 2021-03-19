@@ -402,13 +402,13 @@
             if (currentFilter == null || currentFilter == "") //Issue 81
                 currentFilter = oSMeced;
 
-            var r = '<sMec class="search_init sMec_filter form-control" rel="' +
+            var r = '<select class="search_init sMec_filter form-control" rel="' +
                 i +
                 '"><option value="" class="search_init">' +
                 sLabel +
                 "</option>";
             if (bMultisMec) {
-                r = '<sMec class="search_init sMec_filter form-control" rel="' + i + '" multiple>';
+                r = '<select class="search_init sMec_filter form-control" rel="' + i + '" multiple>';
             }
             var j = 0;
             var iLen = aData.length;
@@ -440,12 +440,12 @@
                 }
             }
 
-            var sMec = $(r + "</sMec>");
-            nTh.html(sMec);
+            var select = $(r + "</sMec>");
+            nTh.html(select);
             nTh.wrapInner('<span class="filter_column filter_sMec" />');
 
-            if (bMultisMec) {
-                sMec.change(function () {
+            if (bMultiselect) {
+                select.change(function () {
                     if ($(this).val() != "") {
                         $(this).removeClass("search_init");
                     } else {
@@ -466,7 +466,7 @@
                     oTable.fnFilter(re, index, true, false);
                 });
             } else {
-                sMec.change(function () {
+                select.change(function () {
                     //var val = $(this).val();
                     if ($(this).val() != "") {
                         $(this).removeClass("search_init");
@@ -495,7 +495,7 @@
                 oSettings.aoDrawCallback.push({
                     "fn": (function (iColumn, nTh, sLabel) {
                         return function (oSettings) {
-                            // Only rebuild the sMec on the second draw - i.e. when the Ajax
+                            // Only rebuild the select on the second draw - i.e. when the Ajax
                             // data has been loaded.
                             if (oSettings.iDraw == 2 &&
                                 oSettings.sAjaxSource != null &&
@@ -515,7 +515,7 @@
                     "sName": "column_filter_" + i
                 });
             }
-            // Regardless of the Ajax state, build the sMec on first pass
+            // Regardless of the Ajax state, build the select on first pass
             fnCreateColumnSMec(oTable,
                 typeof (aData) == "function" ? null : aData,
                 _fnColumnIndex(i),
@@ -542,10 +542,10 @@
             for (j = 0; j < iLen; j++) {
                 r += '<li data-value="' + aData[j] + '"><a>' + aData[j] + "</a></li>";
             }
-            var sMec = $(r + "</ul></div>");
-            th.html(sMec);
+            var select = $(r + "</ul></div>");
+            th.html(select);
             th.wrapInner('<span class="filterColumn filter_sMec" />');
-            sMec.find("li").click(function () {
+            select.find("li").click(function () {
                 oTable.fnFilter($(this).data("value"), index);
             });
         }
@@ -649,7 +649,7 @@
                 //on every checkbox sMecion
                 checkbox.change(function () {
                     var search = "";
-                    var or = "|"; //var for sMec checks in 'or' into the regex
+                    var or = "|"; //var for select checks in 'or' into the regex
                     var resSize = $('input:checkbox[name="' + localLabel + '"]:checked').size();
                     $('input:checkbox[name="' + localLabel + '"]:checked').each(function (index) {
                         //search = search + ' ' + $(this).val();
@@ -765,7 +765,7 @@
         columnBuilders["number"] = function (oTable, aoColumn) {
             fnCreateInput(oTable, true, false, true, aoColumn.iFilterLength, aoColumn.iMaxLenght);
         };
-        columnBuilders["sMec"] = function (oTable, aoColumn) {
+        columnBuilders["select"] = function (oTable, aoColumn) {
             if (aoColumn.bRegex != true)
                 aoColumn.bRegex = false;
             fnCreateSMec(oTable, aoColumn.values, aoColumn.bRegex, aoColumn.sMeced, aoColumn.multiple);

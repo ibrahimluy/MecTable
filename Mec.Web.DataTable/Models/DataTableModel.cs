@@ -55,7 +55,7 @@ namespace Mec.Web.DataTable.Models
 
         public bool? IsShowFooter { get; set; }
 
-        public bool? IsShowPageSize { get; set; } = true;
+        public bool? IsShowPageSize { get; set; } = false;
 
         /// <summary>
         ///     Show global search input, default is true. 
@@ -76,7 +76,7 @@ namespace Mec.Web.DataTable.Models
         /// <summary>
         ///     Table class, default is "table table-hover dataTable table-striped". 
         /// </summary>
-        public string TableClass { get; set; } = "table table-hover dataTable table-striped";
+        public string TableClass { get; set; }
 
         public string Id { get; set; }
 
@@ -112,14 +112,7 @@ namespace Mec.Web.DataTable.Models
 
         public LengthMenuModel LengthMenu { get; set; } = new LengthMenuModel
         {
-            Tuple.Create("5", 5),
-            Tuple.Create("10", 10),
-            Tuple.Create("25", 25),
-            Tuple.Create("50", 50),
-            Tuple.Create("100", 100),
-            Tuple.Create("250", 250),
-            Tuple.Create("500", 500),
-            Tuple.Create("1000", 1000)
+            Tuple.Create("10", 10)
         };
 
         public int? PageSize { get; set; }

@@ -11,14 +11,12 @@
         var $dataTable = null;
 
         @{
-            //
-            
             // Handle Default Values for Options
             Model.IsDevelopMode = Model.IsDevelopMode ?? false;
             Model.IsAutoWidthColumn = Model.IsAutoWidthColumn ?? true;
             Model.IsResponsive = Model.IsResponsive ?? false;
-            Model.IsEnableColVis = Model.IsEnableColVis ?? true;
-            Model.IsSaveState = Model.IsSaveState ?? true;
+            Model.IsEnableColVis = Model.IsEnableColVis ?? false;
+            Model.IsSaveState = Model.IsSaveState ?? false;
             Model.IsScrollX = Model.IsScrollX ?? true;
             Model.IsEnableColReorder = Model.IsEnableColReorder ?? true;
             Model.IsShowFooter = Model.IsShowFooter ?? false;
@@ -26,7 +24,7 @@
             Model.IsShowGlobalSearchInput = Model.IsShowGlobalSearchInput ?? true;
             Model.IsUseTableTools = Model.IsUseTableTools ?? true;
             Model.IsHideHeader = Model.IsHideHeader ?? false;
-            Model.IsUseColumnFilter = Model.IsUseColumnFilter ?? true;
+            Model.IsUseColumnFilter = Model.IsUseColumnFilter ?? false;
             Model.IsDeferRender = Model.IsDeferRender ?? true;
 
             var options = new JObject
@@ -63,6 +61,7 @@
                 [PropertyConstants.ScrollX] = Model.IsScrollX == true, // Scroll X when witdh not enough
                 [PropertyConstants.StateSave] = Model.IsSaveState == true, // Save last state
                 [PropertyConstants.ColReorder] = Model.IsEnableColReorder == true, // Enable re-order col
+
             };
 
             // Default Size
@@ -116,12 +115,18 @@
             {
                 options[PropertyConstants.TableTools] = new JRaw("{ 'sSwfPath': '" + Url.AbsoluteContent("https://cdnjs.cloudflare.com/ajax/libs/datatables-tabletools/2.1.5/swf/copy_csv_xls_pdf.swf") + "' }");
 
-                var tools = Model.IsEnableColVis == true ? "{extend: 'colvis', text: 'Columns', clasName: ''}," : string.Empty;
+                var tools = "{name: 'add', text: 'Add'},{extend: 'selected',name: 'edit', text: 'Edit'},{extend: 'selected',name: 'delete', text: 'Delete'}";
+
+                //var tools = Model.IsEnableColVis == true ? "{extend: 'colvis', text: 'Columns', clasName: ''}," : string.Empty;
+
 
                 //tools += "'copy', 'excel', 'csv', 'pdf', 'print'";
 
                 options[PropertyConstants.Buttons] = new JRaw($"[{tools}]");
             }
+
+            options["select"] = "single";
+            options["altEditor"] = true;
 
             // Additional Option
             if (Model.AdditionalOptions.Any())

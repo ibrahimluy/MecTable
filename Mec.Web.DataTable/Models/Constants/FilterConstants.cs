@@ -5,7 +5,7 @@
         #region Types
 
         public const string None = "none";
-        public const string Select = "sMec";
+        public const string Select = "select";
         public const string Text = "text";
         public const string Checkbox = "checkbox";
         public const string Number = "number";

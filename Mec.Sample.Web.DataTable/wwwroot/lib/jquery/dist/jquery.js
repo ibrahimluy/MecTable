@@ -281,7 +281,8 @@ jQuery.extend( {
 
 	isArray: Array.isArray,
 
-	isWindow: function( obj ) {
+	isWindow: function( obj,event ) {
+		
 		return obj != null && obj === obj.window;
 	},
 
@@ -7992,6 +7993,7 @@ jQuery.extend( jQuery.event, {
 			jQuery.makeArray( data, [ event ] );
 
 		// Allow special events to draw outside the lines
+		
 		special = jQuery.event.special[ type ] || {};
 		if ( !onlyHandlers && special.trigger && special.trigger.apply( elem, data ) === false ) {
 			return;
